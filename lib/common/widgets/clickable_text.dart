@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../util/dimensions.dart';
-import '../../util/app_colors.dart';
 
 class ClickableText extends StatelessWidget {
   final String text;
@@ -31,7 +29,7 @@ class ClickableText extends StatelessWidget {
         style: TextStyle(
           fontSize: fontSize ?? Dimensions.fontSize14,
           fontWeight: fontWeight ?? FontWeight.normal,
-          color: color ?? AppColors.primaryBlue,
+          color: color ?? Theme.of(context).colorScheme.secondary,
         ),
       ),
     );
@@ -71,7 +69,7 @@ class RichClickableText extends StatelessWidget {
         text: TextSpan(
           style: TextStyle(
             fontSize: fontSize ?? Dimensions.fontSize14,
-            color: normalColor ?? (Get.isDarkMode ? AppColors.darkTextTertiary : AppColors.lightTextTertiary),
+            color: normalColor ?? Theme.of(context).textTheme.bodySmall?.color,
             fontWeight: normalWeight ?? FontWeight.normal,
           ),
           children: [
@@ -79,7 +77,7 @@ class RichClickableText extends StatelessWidget {
             TextSpan(
               text: ' $clickableText',
               style: TextStyle(
-                color: clickableColor ?? AppColors.primaryBlue,
+                color: clickableColor ?? Theme.of(context).colorScheme.secondary,
                 fontWeight: clickableWeight ?? FontWeight.w600,
               ),
             ),

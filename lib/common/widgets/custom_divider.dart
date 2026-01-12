@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../util/dimensions.dart';
-import '../../util/app_colors.dart';
 
 class CustomDivider extends StatelessWidget {
   final String? text;
@@ -25,7 +23,7 @@ class CustomDivider extends StatelessWidget {
           Expanded(
             child: Divider(
               thickness: thickness ?? 0.5,
-              color: color ?? (Get.isDarkMode ? AppColors.darkBorder : AppColors.lightBorder),
+              color: color ?? Theme.of(context).dividerColor,
             ),
           ),
           Padding(
@@ -36,7 +34,7 @@ class CustomDivider extends StatelessWidget {
               text!,
               style: TextStyle(
                 fontSize: Dimensions.fontSize12,
-                color: Get.isDarkMode ? AppColors.darkTextTertiary : AppColors.lightTextTertiary,
+                color: Theme.of(context).textTheme.bodySmall?.color,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -44,7 +42,7 @@ class CustomDivider extends StatelessWidget {
           Expanded(
             child: Divider(
               thickness: thickness ?? 0.5,
-              color: color ?? (Get.isDarkMode ? AppColors.darkBorder : AppColors.lightBorder),
+              color: color ?? Theme.of(context).dividerColor,
             ),
           ),
         ],
@@ -53,7 +51,7 @@ class CustomDivider extends StatelessWidget {
     
     return Divider(
       thickness: thickness ?? 0.5,
-      color: color ?? (Get.isDarkMode ? AppColors.darkBorder : AppColors.lightBorder),
+      color: color ?? Theme.of(context).dividerColor,
     );
   }
 }

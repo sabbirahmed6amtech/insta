@@ -1,98 +1,96 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'dimensions.dart';
-import 'app_colors.dart';
 
 class AppStyles {
-  static TextStyle get headingLarge => TextStyle(
+  static TextStyle headingLarge(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize32,
     fontWeight: FontWeight.bold,
-    color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+    color: Theme.of(context).colorScheme.onSurface,
   );
   
-  static TextStyle get headingMedium => TextStyle(
+  static TextStyle headingMedium(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize28,
     fontWeight: FontWeight.bold,
-    color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+    color: Theme.of(context).colorScheme.onSurface,
   );
   
-  static TextStyle get headingSmall => TextStyle(
+  static TextStyle headingSmall(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize24,
     fontWeight: FontWeight.w600,
-    color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+    color: Theme.of(context).colorScheme.onSurface,
   );
   
-  static TextStyle get titleLarge => TextStyle(
+  static TextStyle titleLarge(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize20,
     fontWeight: FontWeight.w600,
-    color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+    color: Theme.of(context).colorScheme.onSurface,
   );
   
-  static TextStyle get titleMedium => TextStyle(
+  static TextStyle titleMedium(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize18,
     fontWeight: FontWeight.w600,
-    color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+    color: Theme.of(context).colorScheme.onSurface,
   );
   
-  static TextStyle get titleSmall => TextStyle(
+  static TextStyle titleSmall(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize16,
     fontWeight: FontWeight.w600,
-    color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+    color: Theme.of(context).colorScheme.onSurface,
   );
   
-  static TextStyle get bodyLarge => TextStyle(
+  static TextStyle bodyLarge(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize16,
     fontWeight: FontWeight.normal,
-    color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+    color: Theme.of(context).colorScheme.onSurface,
   );
   
-  static TextStyle get bodyMedium => TextStyle(
+  static TextStyle bodyMedium(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize14,
     fontWeight: FontWeight.normal,
-    color: Get.isDarkMode ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+    color: Theme.of(context).textTheme.bodyMedium?.color,
   );
   
-  static TextStyle get bodySmall => TextStyle(
+  static TextStyle bodySmall(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize12,
     fontWeight: FontWeight.normal,
-    color: Get.isDarkMode ? AppColors.darkTextTertiary : AppColors.lightTextTertiary,
+    color: Theme.of(context).textTheme.bodySmall?.color,
   );
   
-  static TextStyle get username => TextStyle(
+  static TextStyle username(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize14,
     fontWeight: FontWeight.w600,
-    color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+    color: Theme.of(context).colorScheme.onSurface,
   );
   
-  static TextStyle get caption => TextStyle(
+  static TextStyle caption(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize14,
     fontWeight: FontWeight.normal,
-    color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+    color: Theme.of(context).colorScheme.onSurface,
   );
   
-  static TextStyle get buttonText => TextStyle(
+  static TextStyle buttonText(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize14,
     fontWeight: FontWeight.w600,
-    color: AppColors.white,
+    color: Theme.of(context).colorScheme.onSecondary,
   );
   
-  static TextStyle get linkText => TextStyle(
+  static TextStyle linkText(BuildContext context) => TextStyle(
     fontSize: Dimensions.fontSize14,
     fontWeight: FontWeight.normal,
-    color: AppColors.primaryBlue,
+    color: Theme.of(context).colorScheme.secondary,
   );
   
-  static BoxDecoration get containerDecoration => BoxDecoration(
-    color: Get.isDarkMode ? AppColors.darkSurface : AppColors.lightSurface,
+  static BoxDecoration containerDecoration(BuildContext context) => BoxDecoration(
+    color: Theme.of(context).colorScheme.surface,
     borderRadius: BorderRadius.circular(Dimensions.radius12),
     border: Border.all(
-      color: Get.isDarkMode ? AppColors.darkBorder : AppColors.lightBorder,
+      color: Theme.of(context).colorScheme.outline,
       width: 0.5,
     ),
   );
   
-  static BoxDecoration get cardDecoration => BoxDecoration(
-    color: Get.isDarkMode ? AppColors.darkSurface : AppColors.lightSurface,
+  static BoxDecoration cardDecoration(BuildContext context) => BoxDecoration(
+    color: Theme.of(context).colorScheme.surface,
     borderRadius: BorderRadius.circular(Dimensions.radius8),
     boxShadow: [
       BoxShadow(
@@ -103,7 +101,8 @@ class AppStyles {
     ],
   );
   
-  static InputDecoration inputDecoration({
+  static InputDecoration inputDecoration(
+    BuildContext context, {
     required String hintText,
     Widget? prefixIcon,
     Widget? suffixIcon,
@@ -111,35 +110,35 @@ class AppStyles {
     hintText: hintText,
     hintStyle: TextStyle(
       fontSize: Dimensions.fontSize14,
-      color: Get.isDarkMode ? AppColors.darkTextTertiary : AppColors.lightTextTertiary,
+      color: Theme.of(context).textTheme.bodySmall?.color,
     ),
     prefixIcon: prefixIcon,
     suffixIcon: suffixIcon,
     filled: true,
-    fillColor: Get.isDarkMode ? AppColors.darkSurface : AppColors.lightBackground,
+    fillColor: Theme.of(context).colorScheme.surface,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(Dimensions.radius8),
       borderSide: BorderSide(
-        color: Get.isDarkMode ? AppColors.darkBorder : AppColors.lightBorder,
+        color: Theme.of(context).colorScheme.outline,
       ),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(Dimensions.radius8),
       borderSide: BorderSide(
-        color: Get.isDarkMode ? AppColors.darkBorder : AppColors.lightBorder,
+        color: Theme.of(context).colorScheme.outline,
       ),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(Dimensions.radius8),
-      borderSide: const BorderSide(
-        color: AppColors.primaryBlue,
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.secondary,
         width: 2,
       ),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(Dimensions.radius8),
-      borderSide: const BorderSide(
-        color: AppColors.errorRed,
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.error,
       ),
     ),
     contentPadding: EdgeInsets.symmetric(
@@ -148,3 +147,4 @@ class AppStyles {
     ),
   );
 }
+

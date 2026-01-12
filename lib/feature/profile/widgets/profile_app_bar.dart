@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/profile_controller.dart';
 import '../../../util/dimensions.dart';
-import '../../../util/app_colors.dart';
 
 class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ProfileAppBar({super.key});
@@ -12,7 +11,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
     final controller = Get.find<ProfileController>();
 
     return AppBar(
-      backgroundColor: Get.isDarkMode ? AppColors.darkBackground : AppColors.lightSurface,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 0,
       title: Row(
         mainAxisSize: MainAxisSize.min,
@@ -20,7 +19,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
           Icon(
             Icons.lock_outline,
             size: Dimensions.iconSize16,
-            color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           SizedBox(width: Dimensions.paddingSize5),
           Text(
@@ -28,13 +27,13 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
             style: TextStyle(
               fontSize: Dimensions.fontSize16,
               fontWeight: FontWeight.w600,
-              color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           Icon(
             Icons.keyboard_arrow_down,
             size: Dimensions.iconSize20,
-            color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ],
       ),
@@ -42,7 +41,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: Icon(
             Icons.add_box_outlined,
-            color: Get.isDarkMode ? AppColors.darkIcon : AppColors.lightIcon,
+            color: Theme.of(context).iconTheme.color,
             size: Dimensions.iconSize28,
           ),
           onPressed: () {},
@@ -50,7 +49,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: Icon(
             Icons.menu,
-            color: Get.isDarkMode ? AppColors.darkIcon : AppColors.lightIcon,
+            color: Theme.of(context).iconTheme.color,
             size: Dimensions.iconSize28,
           ),
           onPressed: controller.showMenu,

@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../model/highlight_model.dart';
 import '../../../util/dimensions.dart';
-import '../../../util/app_colors.dart';
 
 class HighlightsSection extends StatelessWidget {
   final List<HighlightModel> highlights;
 
-  const HighlightsSection({
-    super.key,
-    required this.highlights,
-  });
+  const HighlightsSection({super.key, required this.highlights});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +45,7 @@ class _HighlightItem extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Get.isDarkMode ? AppColors.darkBorder : AppColors.lightBorder,
+                color: Theme.of(context).colorScheme.outline,
                 width: 1,
               ),
             ),
@@ -58,7 +53,7 @@ class _HighlightItem extends StatelessWidget {
                 ? Icon(
                     Icons.add,
                     size: Dimensions.iconSize32,
-                    color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+                    color: Theme.of(context).colorScheme.onSurface,
                   )
                 : CircleAvatar(
                     backgroundImage: NetworkImage(highlight.coverImage),
@@ -69,7 +64,7 @@ class _HighlightItem extends StatelessWidget {
             highlight.title,
             style: TextStyle(
               fontSize: Dimensions.fontSize12,
-              color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ],

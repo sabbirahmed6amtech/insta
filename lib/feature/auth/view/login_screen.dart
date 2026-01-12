@@ -8,7 +8,6 @@ import '../../../common/widgets/logo_widget.dart';
 import '../../../common/widgets/clickable_text.dart';
 import '../../../common/widgets/social_button.dart';
 import '../../../util/dimensions.dart';
-import '../../../util/app_colors.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -25,7 +24,7 @@ class LoginScreen extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           onPressed: () => Get.back(),
         ),
@@ -63,9 +62,7 @@ class LoginScreen extends StatelessWidget {
                     controller.obscurePassword.value
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined,
-                    color: Get.isDarkMode 
-                        ? AppColors.darkTextTertiary 
-                        : AppColors.lightTextTertiary,
+                    color: Theme.of(context).textTheme.bodySmall?.color,
                     size: Dimensions.iconSize20,
                   ),
                   onPressed: controller.togglePasswordVisibility,
@@ -92,8 +89,8 @@ class LoginScreen extends StatelessWidget {
                 onPressed: controller.login,
                 isLoading: controller.isLoading.value,
                 backgroundColor: controller.isButtonEnabled.value 
-                    ? AppColors.primaryBlue 
-                    : AppColors.primaryBlue.withOpacity(0.3),
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.secondary.withOpacity(0.3),
               )),
               
               SizedBox(height: Dimensions.paddingSize30),
@@ -124,18 +121,14 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Divider(
                       thickness: 0.5,
-                      color: Get.isDarkMode 
-                          ? AppColors.darkBorder 
-                          : AppColors.lightBorder,
+                      color: Theme.of(context).dividerColor,
                     ),
                     SizedBox(height: Dimensions.paddingSize16),
                     Text(
                       'Instagram from Facebook',
                       style: TextStyle(
                         fontSize: Dimensions.fontSize12,
-                        color: Get.isDarkMode 
-                            ? AppColors.darkTextTertiary 
-                            : AppColors.lightTextTertiary,
+                        color: Theme.of(context).textTheme.bodySmall?.color,
                       ),
                     ),
                   ],

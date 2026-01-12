@@ -3,16 +3,13 @@ import 'package:get/get.dart';
 import '../model/post_model.dart';
 import '../controller/home_controller.dart';
 import '../../../util/dimensions.dart';
-import '../../../util/app_colors.dart';
 import '../../../util/extensions.dart';
+import '../../../theme/llight_theme.dart';
 
 class PostCard extends StatelessWidget {
   final PostModel post;
 
-  const PostCard({
-    super.key,
-    required this.post,
-  });
+  const PostCard({super.key, required this.post});
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +48,10 @@ class _PostHeader extends StatelessWidget {
             height: 35,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              gradient: const LinearGradient(
+              gradient: LinearGradient(
                 colors: [
-                  AppColors.gradientPurple,
-                  AppColors.gradientOrange,
+                  Theme.of(context).extension<InstaColors>()!.gradientPurple,
+                  Theme.of(context).extension<InstaColors>()!.gradientOrange,
                 ],
               ),
             ),
@@ -62,9 +59,7 @@ class _PostHeader extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Get.isDarkMode
-                    ? AppColors.darkBackground
-                    : AppColors.lightSurface,
+                color: Theme.of(context).scaffoldBackgroundColor,
               ),
               padding: const EdgeInsets.all(2),
               child: CircleAvatar(
@@ -84,9 +79,7 @@ class _PostHeader extends StatelessWidget {
                       style: TextStyle(
                         fontSize: Dimensions.fontSize14,
                         fontWeight: FontWeight.w600,
-                        color: Get.isDarkMode
-                            ? AppColors.darkText
-                            : AppColors.lightText,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     if (post.isVerified) ...[
@@ -94,7 +87,7 @@ class _PostHeader extends StatelessWidget {
                       Icon(
                         Icons.verified,
                         size: Dimensions.iconSize16,
-                        color: AppColors.primaryBlue,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ],
                   ],
@@ -104,9 +97,7 @@ class _PostHeader extends StatelessWidget {
                     post.location,
                     style: TextStyle(
                       fontSize: Dimensions.fontSize12,
-                      color: Get.isDarkMode
-                          ? AppColors.darkTextTertiary
-                          : AppColors.lightTextTertiary,
+                      color: Theme.of(context).textTheme.bodySmall?.color,
                     ),
                   ),
               ],
@@ -115,7 +106,7 @@ class _PostHeader extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.more_vert,
-              color: Get.isDarkMode ? AppColors.darkIcon : AppColors.lightIcon,
+              color: Theme.of(context).iconTheme.color,
               size: Dimensions.iconSize24,
             ),
             onPressed: () {},
@@ -185,7 +176,7 @@ class _PostImagesState extends State<_PostImages> {
               child: Text(
                 '${currentPage + 1}/${widget.images.length}',
                 style: TextStyle(
-                  color: AppColors.white,
+                  color: Theme.of(context).colorScheme.onSecondary,
                   fontSize: Dimensions.fontSize12,
                   fontWeight: FontWeight.w600,
                 ),
@@ -210,8 +201,10 @@ class _PostImagesState extends State<_PostImages> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: currentPage == index
-                        ? AppColors.primaryBlue
-                        : AppColors.white.withOpacity(0.5),
+                        ? Theme.of(context).colorScheme.secondary
+                        : Theme.of(
+                            context,
+                          ).colorScheme.onSecondary.withOpacity(0.5),
                   ),
                 ),
               ),
@@ -239,16 +232,16 @@ class _PostActions extends StatelessWidget {
       child: Row(
         children: [
           Obx(() {
-            final currentPost = controller.posts
-                .firstWhere((p) => p.id == post.id, orElse: () => post);
+            final currentPost = controller.posts.firstWhere(
+              (p) => p.id == post.id,
+              orElse: () => post,
+            );
             return IconButton(
               icon: Icon(
-                currentPost.isLiked
-                    ? Icons.favorite
-                    : Icons.favorite_border,
+                currentPost.isLiked ? Icons.favorite : Icons.favorite_border,
                 color: currentPost.isLiked
-                    ? AppColors.heartRed
-                    : (Get.isDarkMode ? AppColors.darkIcon : AppColors.lightIcon),
+                    ? Theme.of(context).extension<InstaColors>()!.heartRed
+                    : Theme.of(context).iconTheme.color,
                 size: Dimensions.iconSize28,
               ),
               onPressed: () => controller.toggleLike(post.id),
@@ -257,7 +250,7 @@ class _PostActions extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.mode_comment_outlined,
-              color: Get.isDarkMode ? AppColors.darkIcon : AppColors.lightIcon,
+              color: Theme.of(context).iconTheme.color,
               size: Dimensions.iconSize28,
             ),
             onPressed: () {},
@@ -265,21 +258,21 @@ class _PostActions extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.send_outlined,
-              color: Get.isDarkMode ? AppColors.darkIcon : AppColors.lightIcon,
+              color: Theme.of(context).iconTheme.color,
               size: Dimensions.iconSize28,
             ),
             onPressed: () {},
           ),
           const Spacer(),
           Obx(() {
-            final currentPost = controller.posts
-                .firstWhere((p) => p.id == post.id, orElse: () => post);
+            final currentPost = controller.posts.firstWhere(
+              (p) => p.id == post.id,
+              orElse: () => post,
+            );
             return IconButton(
               icon: Icon(
-                currentPost.isSaved
-                    ? Icons.bookmark
-                    : Icons.bookmark_border,
-                color: Get.isDarkMode ? AppColors.darkIcon : AppColors.lightIcon,
+                currentPost.isSaved ? Icons.bookmark : Icons.bookmark_border,
+                color: Theme.of(context).iconTheme.color,
                 size: Dimensions.iconSize28,
               ),
               onPressed: () => controller.toggleSave(post.id),
@@ -320,15 +313,15 @@ class _PostLikes extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: Get.isDarkMode
-                                  ? AppColors.darkBackground
-                                  : AppColors.lightSurface,
+                              color: Theme.of(context).scaffoldBackgroundColor,
                               width: 2,
                             ),
                           ),
                           child: CircleAvatar(
                             radius: 10,
-                            backgroundColor: AppColors.lightBorder,
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.outline,
                           ),
                         ),
                       ),
@@ -341,9 +334,7 @@ class _PostLikes extends StatelessWidget {
                     text: TextSpan(
                       style: TextStyle(
                         fontSize: Dimensions.fontSize14,
-                        color: Get.isDarkMode
-                            ? AppColors.darkText
-                            : AppColors.lightText,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       children: [
                         const TextSpan(text: 'Liked by '),
@@ -353,7 +344,8 @@ class _PostLikes extends StatelessWidget {
                         ),
                         if (post.likedBy.length > 1)
                           TextSpan(
-                            text: ' and ${(post.likes - 1).toCompactFormat()} others',
+                            text:
+                                ' and ${(post.likes - 1).toCompactFormat()} others',
                             style: const TextStyle(fontWeight: FontWeight.w600),
                           ),
                       ],
@@ -368,7 +360,7 @@ class _PostLikes extends StatelessWidget {
               style: TextStyle(
                 fontSize: Dimensions.fontSize14,
                 fontWeight: FontWeight.w600,
-                color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
         ],
@@ -393,7 +385,7 @@ class _PostCaption extends StatelessWidget {
         text: TextSpan(
           style: TextStyle(
             fontSize: Dimensions.fontSize14,
-            color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           children: [
             TextSpan(
@@ -426,9 +418,7 @@ class _PostComments extends StatelessWidget {
         'View all ${post.comments} comments',
         style: TextStyle(
           fontSize: Dimensions.fontSize14,
-          color: Get.isDarkMode
-              ? AppColors.darkTextTertiary
-              : AppColors.lightTextTertiary,
+          color: Theme.of(context).textTheme.bodySmall?.color,
         ),
       ),
     );
@@ -451,9 +441,7 @@ class _PostTime extends StatelessWidget {
         post.createdAt.toInstagramFormat(),
         style: TextStyle(
           fontSize: Dimensions.fontSize12,
-          color: Get.isDarkMode
-              ? AppColors.darkTextTertiary
-              : AppColors.lightTextTertiary,
+          color: Theme.of(context).textTheme.bodySmall?.color,
         ),
       ),
     );

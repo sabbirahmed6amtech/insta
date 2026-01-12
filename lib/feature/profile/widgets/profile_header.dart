@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../model/profile_model.dart';
 import '../../../util/dimensions.dart';
-import '../../../util/app_colors.dart';
+import '../../../theme/llight_theme.dart';
+
 class ProfileHeader extends StatelessWidget {
   final ProfileModel profile;
 
-  const ProfileHeader({
-    super.key,
-    required this.profile,
-  });
+  const ProfileHeader({super.key, required this.profile});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +22,14 @@ class ProfileHeader extends StatelessWidget {
                 height: 90,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: const LinearGradient(
+                  gradient: LinearGradient(
                     colors: [
-                      AppColors.gradientPurple,
-                      AppColors.gradientOrange,
+                      Theme.of(
+                        context,
+                      ).extension<InstaColors>()!.gradientPurple,
+                      Theme.of(
+                        context,
+                      ).extension<InstaColors>()!.gradientOrange,
                     ],
                   ),
                 ),
@@ -36,9 +37,7 @@ class ProfileHeader extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Get.isDarkMode
-                        ? AppColors.darkBackground
-                        : AppColors.lightSurface,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                   padding: const EdgeInsets.all(3),
                   child: CircleAvatar(
@@ -50,18 +49,9 @@ class ProfileHeader extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _StatItem(
-                      count: profile.posts,
-                      label: 'Posts',
-                    ),
-                    _StatItem(
-                      count: profile.followers,
-                      label: 'Followers',
-                    ),
-                    _StatItem(
-                      count: profile.following,
-                      label: 'Following',
-                    ),
+                    _StatItem(count: profile.posts, label: 'Posts'),
+                    _StatItem(count: profile.followers, label: 'Followers'),
+                    _StatItem(count: profile.following, label: 'Following'),
                   ],
                 ),
               ),
@@ -73,7 +63,7 @@ class ProfileHeader extends StatelessWidget {
             style: TextStyle(
               fontSize: Dimensions.fontSize14,
               fontWeight: FontWeight.w600,
-              color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           SizedBox(height: Dimensions.paddingSize5),
@@ -81,7 +71,7 @@ class ProfileHeader extends StatelessWidget {
             profile.bio,
             style: TextStyle(
               fontSize: Dimensions.fontSize14,
-              color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ],
@@ -94,10 +84,7 @@ class _StatItem extends StatelessWidget {
   final int count;
   final String label;
 
-  const _StatItem({
-    required this.count,
-    required this.label,
-  });
+  const _StatItem({required this.count, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -108,14 +95,14 @@ class _StatItem extends StatelessWidget {
           style: TextStyle(
             fontSize: Dimensions.fontSize18,
             fontWeight: FontWeight.bold,
-            color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         Text(
           label,
           style: TextStyle(
             fontSize: Dimensions.fontSize14,
-            color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ],

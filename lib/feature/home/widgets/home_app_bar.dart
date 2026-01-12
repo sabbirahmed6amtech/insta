@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../../../util/dimensions.dart';
-import '../../../../util/app_colors.dart';
 import '../../../../common/widgets/logo_widget.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -10,14 +8,14 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Get.isDarkMode ? AppColors.darkBackground : AppColors.lightSurface,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 0,
       title: const LogoWidget(height: 35),
       actions: [
         IconButton(
           icon: Icon(
             Icons.favorite_border,
-            color: Get.isDarkMode ? AppColors.darkIcon : AppColors.lightIcon,
+            color: Theme.of(context).iconTheme.color,
             size: Dimensions.iconSize28,
           ),
           onPressed: () {},
@@ -25,7 +23,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: Icon(
             Icons.send_outlined,
-            color: Get.isDarkMode ? AppColors.darkIcon : AppColors.lightIcon,
+            color: Theme.of(context).iconTheme.color,
             size: Dimensions.iconSize28,
           ),
           onPressed: () {},

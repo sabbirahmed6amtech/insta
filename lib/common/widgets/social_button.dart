@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../util/dimensions.dart';
-import '../../util/app_colors.dart';
 
 class SocialButton extends StatelessWidget {
   final String text;
@@ -40,7 +39,7 @@ class SocialButton extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: iconColor ?? AppColors.primaryBlue,
+              color: iconColor ?? Theme.of(context).colorScheme.secondary,
               size: Dimensions.iconSize20,
             ),
             SizedBox(width: Dimensions.paddingSize8),
@@ -49,7 +48,7 @@ class SocialButton extends StatelessWidget {
               style: TextStyle(
                 fontSize: Dimensions.fontSize14,
                 fontWeight: FontWeight.w600,
-                color: textColor ?? AppColors.primaryBlue,
+                color: textColor ?? Theme.of(context).colorScheme.secondary,
               ),
             ),
           ],

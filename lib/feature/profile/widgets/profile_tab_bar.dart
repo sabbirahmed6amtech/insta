@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/profile_controller.dart';
 import '../../../util/dimensions.dart';
-import '../../../util/app_colors.dart';
 
 class ProfileTabBar extends StatelessWidget {
   const ProfileTabBar({super.key});
@@ -11,34 +10,36 @@ class ProfileTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<ProfileController>();
 
-    return Obx(() => Container(
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                color: Get.isDarkMode ? AppColors.darkBorder : AppColors.lightBorder,
-                width: 0.5,
-              ),
+    return Obx(
+      () => Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Theme.of(context).colorScheme.outline,
+              width: 0.5,
             ),
           ),
-          child: Row(
-            children: [
-              Expanded(
-                child: _TabItem(
-                  icon: Icons.grid_on,
-                  isSelected: controller.selectedTabIndex.value == 0,
-                  onTap: () => controller.changeTab(0),
-                ),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: _TabItem(
+                icon: Icons.grid_on,
+                isSelected: controller.selectedTabIndex.value == 0,
+                onTap: () => controller.changeTab(0),
               ),
-              Expanded(
-                child: _TabItem(
-                  icon: Icons.video_library_outlined,
-                  isSelected: controller.selectedTabIndex.value == 1,
-                  onTap: () => controller.changeTab(1),
-                ),
+            ),
+            Expanded(
+              child: _TabItem(
+                icon: Icons.video_library_outlined,
+                isSelected: controller.selectedTabIndex.value == 1,
+                onTap: () => controller.changeTab(1),
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -63,7 +64,7 @@ class _TabItem extends StatelessWidget {
           border: Border(
             top: BorderSide(
               color: isSelected
-                  ? (Get.isDarkMode ? AppColors.darkText : AppColors.lightText)
+                  ? Theme.of(context).colorScheme.onSurface
                   : Colors.transparent,
               width: 1,
             ),
@@ -72,8 +73,8 @@ class _TabItem extends StatelessWidget {
         child: Icon(
           icon,
           color: isSelected
-              ? (Get.isDarkMode ? AppColors.darkText : AppColors.lightText)
-              : (Get.isDarkMode ? AppColors.darkTextTertiary : AppColors.lightTextTertiary),
+              ? Theme.of(context).colorScheme.onSurface
+              : Theme.of(context).textTheme.bodySmall?.color,
           size: Dimensions.iconSize28,
         ),
       ),

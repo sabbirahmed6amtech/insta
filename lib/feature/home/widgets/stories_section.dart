@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../model/story_model.dart';
 import '../../../util/dimensions.dart';
-import '../../../util/app_colors.dart';
+import '../../../theme/llight_theme.dart';
 
 class StoriesSection extends StatelessWidget {
   final List<StoryModel> stories;
 
-  const StoriesSection({
-    super.key,
-    required this.stories,
-  });
+  const StoriesSection({super.key, required this.stories});
 
   @override
   Widget build(BuildContext context) {
@@ -54,20 +50,24 @@ class _StoryItem extends StatelessWidget {
                   shape: BoxShape.circle,
                   gradient: story.isSeen
                       ? null
-                      : const LinearGradient(
+                      : LinearGradient(
                           colors: [
-                            AppColors.gradientPurple,
-                            AppColors.gradientOrange,
-                            AppColors.gradientYellow,
+                            Theme.of(
+                              context,
+                            ).extension<InstaColors>()!.gradientPurple,
+                            Theme.of(
+                              context,
+                            ).extension<InstaColors>()!.gradientOrange,
+                            Theme.of(
+                              context,
+                            ).extension<InstaColors>()!.gradientYellow,
                           ],
                           begin: Alignment.topRight,
                           end: Alignment.bottomLeft,
                         ),
                   border: story.isSeen
                       ? Border.all(
-                          color: Get.isDarkMode
-                              ? AppColors.darkBorder
-                              : AppColors.lightBorder,
+                          color: Theme.of(context).colorScheme.outline,
                           width: 2,
                         )
                       : null,
@@ -76,9 +76,7 @@ class _StoryItem extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Get.isDarkMode
-                        ? AppColors.darkBackground
-                        : AppColors.lightSurface,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                   padding: const EdgeInsets.all(2),
                   child: CircleAvatar(
@@ -97,19 +95,17 @@ class _StoryItem extends StatelessWidget {
                       vertical: Dimensions.paddingSize5,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.errorRed,
+                      color: Theme.of(context).colorScheme.error,
                       borderRadius: BorderRadius.circular(Dimensions.radius10),
                       border: Border.all(
-                        color: Get.isDarkMode
-                            ? AppColors.darkBackground
-                            : AppColors.lightSurface,
+                        color: Theme.of(context).scaffoldBackgroundColor,
                         width: 2,
                       ),
                     ),
                     child: Text(
                       'LIVE',
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: Theme.of(context).colorScheme.onSecondary,
                         fontSize: Dimensions.fontSize10,
                         fontWeight: FontWeight.bold,
                       ),
@@ -124,18 +120,16 @@ class _StoryItem extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryBlue,
+                      color: Theme.of(context).colorScheme.secondary,
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Get.isDarkMode
-                            ? AppColors.darkBackground
-                            : AppColors.lightSurface,
+                        color: Theme.of(context).scaffoldBackgroundColor,
                         width: 2,
                       ),
                     ),
                     child: Icon(
                       Icons.add,
-                      color: AppColors.white,
+                      color: Theme.of(context).colorScheme.onSecondary,
                       size: Dimensions.iconSize16,
                     ),
                   ),
@@ -149,9 +143,7 @@ class _StoryItem extends StatelessWidget {
               story.username,
               style: TextStyle(
                 fontSize: Dimensions.fontSize12,
-                color: Get.isDarkMode
-                    ? AppColors.darkText
-                    : AppColors.lightText,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

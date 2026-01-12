@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/profile_controller.dart';
 import '../../../util/dimensions.dart';
-import '../../../util/app_colors.dart';
 
 class ProfileButtons extends StatelessWidget {
   const ProfileButtons({super.key});
@@ -54,28 +53,30 @@ class _ActionButton extends StatelessWidget {
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
           side: BorderSide(
-            color: Get.isDarkMode ? AppColors.darkBorder : AppColors.lightBorder,
+            color: Theme.of(context).colorScheme.outline,
             width: 1,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(Dimensions.radius8),
           ),
           padding: EdgeInsets.symmetric(
-            horizontal: isIconOnly ? Dimensions.paddingSize10 : Dimensions.paddingSize16,
+            horizontal: isIconOnly
+                ? Dimensions.paddingSize10
+                : Dimensions.paddingSize16,
           ),
         ),
         child: icon != null
             ? Icon(
                 icon,
                 size: Dimensions.iconSize20,
-                color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+                color: Theme.of(context).colorScheme.onSurface,
               )
             : Text(
                 text ?? '',
                 style: TextStyle(
                   fontSize: Dimensions.fontSize14,
                   fontWeight: FontWeight.w600,
-                  color: Get.isDarkMode ? AppColors.darkText : AppColors.lightText,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
       ),
